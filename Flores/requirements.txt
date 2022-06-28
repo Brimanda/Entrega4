@@ -1,0 +1,4 @@
+django 
+pillow
+social-auth-app-django
+django-crispy-forms
