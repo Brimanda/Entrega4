@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import home, productos, quienessomos, fundacion, registro, aproducto, lproducto, mproducto, FlorViewSet, eproducto
+from .views import home, productos, quienessomos, fundacion, registro, aproducto, lproducto, mproducto, FlorViewSet, eproducto, enciclopedia
 from rest_framework import routers
 
 router = routers.DefaultRouter()
@@ -15,5 +15,6 @@ urlpatterns = [
     path('lproducto/', lproducto, name="lproducto"),
     path('mproducto/<id>/', mproducto, name="mproducto"),
     path('api/', include(router.urls)),
-    path('eproducto/<id>/', eproducto, name="eproducto")
+    path('eproducto/<id>/', eproducto, name="eproducto"),
+    path('enciclopedia/', enciclopedia, name="enciclopedia")
 ]

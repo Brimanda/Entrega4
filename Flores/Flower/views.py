@@ -103,3 +103,7 @@ def eproducto(request, id):
     producto = get_object_or_404(Producto, id=id)
     producto.delete()
     return redirect(to="lproducto")
+
+def enciclopedia(request):
+
+    return render(request, 'core/enciclopedia.html')
