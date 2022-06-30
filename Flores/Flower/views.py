@@ -4,8 +4,11 @@ from .forms import CustomUserCreationForm, ProductoForm
 from .models import Producto, Flor
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from .carro import Carro
 from rest_framework import viewsets
 from .serializers import FlorSerializer
+from django.core.paginator import Paginator
+from django.http import Http404
 # Create your views here.
 
 class FlorViewSet(viewsets.ModelViewSet):
@@ -47,7 +50,7 @@ def registro(request):
             user = authenticate(
                 username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
             login(request, user)
-            messages.success(request, "Registrado correctamente")
+            messages.success(request, 'Usuario registrado correctamente')
             return redirect(to="home")
         data["form"] = formulario
     return render(request, 'registration/registro.html', data)
@@ -73,10 +76,18 @@ def aproducto(request):
 def lproducto(request):
 
     productos = Producto.objects.all()
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(productos, 5)
+        productos = paginator.page(page)
+    except:
+        raise Http404
 
     data = {
 
-        'productos': productos
+        'entity': productos,
+        'paginator': paginator
     }
 
     return render(request, 'admin/lproducto.html', data)
@@ -104,6 +115,39 @@ def eproducto(request, id):
     producto.delete()
     return redirect(to="lproducto")
 
-def enciclopedia(request):
+# Acciones carrito
+def viewcart(request):
+    return render(request, 'carrito/carro.html', {'carro': request.session['carro']})
 
-    return render(request, 'core/enciclopedia.html')
+def agregar_producto(request, producto_id):
+    carro=Carro(request)
+    producto=Productos.objects.get(id=producto_id)
+    carro.agregar(producto=producto)
+    return redirect(to="/viewcart")
+
+def eliminar_producto(request, producto_id):
+    carro=Carro(request)
+    producto=Productos.objects.get(id=producto_id)
+    carro.eliminar(producto=producto)
+    return redirect(to="/viewcart")
+
+
+def restar_producto(request, producto_id):
+    carro = Carro(request)
+    producto = Productos.objects.get(id=producto_id)
+    carro.restar(producto=producto)
+    return redirect(to="/viewcart")
+
+def cleancart(request):
+    carro=Carro(request)
+    carro.limpiar_carro()
+    return redirect(to="/viewcart")
+
+
+def procesar_compra(request):
+    messages.success(request, 'Gracias por su Compra!!')
+    carro = Carro(request)
+    carro.limpiar_carro()
+    return redirect('/productos')
+
+

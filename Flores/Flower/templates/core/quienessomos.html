@@ -42,34 +42,58 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{% url 'quienessomos' %}">¿Quienes Somos?</a>
                     </li>
+                    {% if user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'lproducto' %}">Admin</a>
+                    </li>
                 </ul>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a href="#">
-                        <h6>{{ user.username }}</h6>
-                    </a>
-                </li>
-                <hr>-</hr>
-                <li>
-                    <a href="{% url 'logout' %}">
-                        <h6>Cerrar sesión</h6>
-                    </a>
-                </li>
-                {% else %}
-                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Iniciar Sesión</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'registro' %}">Registro</a>
-                    </li>
-                    {% endif %}
+                {% endif %}
             </div>
             </div>
         </nav>
         </div>
     </header>
-
+    <!-- 2nav -->
+    <ul class="nav navbar-dark navbar justify-content-end" style="background-color: #000000">
+        {% if user.is_superuser %}
+        <li class="nav-item">
+            <a href="#">
+                <h6>{{ user.username }}</h6>
+            </a>
+        </li>
+        &nbsp;
+        &nbsp;
+        <li>
+            <a href="{% url 'logout' %}">
+                <h6>Cerrar sesión</h6>
+            </a>
+        </li>
+        {% elif user.is_authenticated %}
+        <li class="nav-item">
+            <a href="#">
+                <h6>{{ user.username }}</h6>
+            </a>
+        </li>
+        &nbsp;
+        &nbsp;
+        <li>
+            <a href="{% url 'logout' %}">
+                <h6>Cerrar sesión</h6>
+            </a>
+        </li>
+        {% else %}
+        <li class="nav-item justify-content-end">
+            <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Iniciar Sesión</a>
+        </li>
+        <li class="nav-item justify-content-end">
+            <a class="nav-link active" aria-current="page" href="{% url 'registro' %}">Registro</a>
+        </li>
+        {% endif %}
+        &nbsp;
+        &nbsp;
+        &nbsp;
+    </ul>
+    <!-- 2nav -->
 
 
     </div>
@@ -173,7 +197,8 @@
                         </a>
                     </div>
                     <div class="col-12 col-lg-8">
-                        <img src="{% static 'core/img/slider6.jpg' %}" width="700" height="1000" alt="" class="img-fluid">
+                        <img src="{% static 'core/img/slider6.jpg' %}" width="700" height="1000" alt=""
+                            class="img-fluid">
                     </div>
                 </div>
             </div>
