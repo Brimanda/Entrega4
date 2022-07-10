@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import AbstractUser
+
 # Create your models here.
 
 class Categoria(models.Model):
@@ -20,6 +22,7 @@ class Flor(models.Model):
         return self.idFlor
 
 class Producto(models.Model):
+    idProducto = models.IntegerField(primary_key=True, default=0)
     nombre = models.CharField(max_length=40)
     desc = models.CharField(max_length=80)
     precio = models.IntegerField()
@@ -28,3 +31,18 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class User(AbstractUser):
+
+    def __str__(self):
+        return self.email
+
+    def get_full_name(self):
+        return '{} {}'.format(self.first_name, self.last_name)
+
+    @property
+    def shipping_address(self):
+        return self.shippingaddress_set.filter(default=True).first()
+    
+    def has_shipping_address(self):
+        return self.shipping_address is not None

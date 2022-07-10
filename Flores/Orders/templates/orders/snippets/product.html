@@ -1,0 +1,15 @@
+<div class="row mt-2">
+    <div class="col-2">
+        {% if product.imagen %}
+        <img src="{{ product.imagen.url }}" alt="Imagen" width="100" height="100">
+        {% endif %}
+    </div>
+    <div class="col">
+        <div class="row">
+            <strong>{{ product.nombre }}</strong>
+        </div>
+        <div class="row">
+            <strong class="text-danger">$ {{ product.precio }}</strong>
+        </div>
+    </div>
+</div>

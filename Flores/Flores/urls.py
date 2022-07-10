@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from Flower import urls
+from . import urls
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,6 +25,9 @@ urlpatterns = [
     path('', include('Flower.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
+    path('carrito/', include('Carts.urls')),
+    path('orden/', include('Orders.urls')),
+    path('direcciones/', include('Address.urls'))
 ]
 
 if settings.DEBUG:

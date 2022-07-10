@@ -92,9 +92,9 @@ def lproducto(request):
 
     return render(request, 'admin/lproducto.html', data)
 
-def mproducto(request, id):
+def mproducto(request, idProducto):
     
-    producto = get_object_or_404(Producto, id = id)
+    producto = get_object_or_404(Producto, idProducto = idProducto)
 
     data = {
 
@@ -110,44 +110,11 @@ def mproducto(request, id):
 
     return render(request, 'admin/mproducto.html', data)
 
-def eproducto(request, id):
-    producto = get_object_or_404(Producto, id=id)
+def eproducto(request, idProducto):
+    producto = get_object_or_404(Producto, idProducto=idProducto)
     producto.delete()
     return redirect(to="lproducto")
 
-# Acciones carrito
-def viewcart(request):
-    return render(request, 'carrito/carro.html', {'carro': request.session['carro']})
 
-def agregar_producto(request, producto_id):
-    carro=Carro(request)
-    producto=Productos.objects.get(id=producto_id)
-    carro.agregar(producto=producto)
-    return redirect(to="/viewcart")
-
-def eliminar_producto(request, producto_id):
-    carro=Carro(request)
-    producto=Productos.objects.get(id=producto_id)
-    carro.eliminar(producto=producto)
-    return redirect(to="/viewcart")
-
-
-def restar_producto(request, producto_id):
-    carro = Carro(request)
-    producto = Productos.objects.get(id=producto_id)
-    carro.restar(producto=producto)
-    return redirect(to="/viewcart")
-
-def cleancart(request):
-    carro=Carro(request)
-    carro.limpiar_carro()
-    return redirect(to="/viewcart")
-
-
-def procesar_compra(request):
-    messages.success(request, 'Gracias por su Compra!!')
-    carro = Carro(request)
-    carro.limpiar_carro()
-    return redirect('/productos')
 
 

@@ -30,8 +30,8 @@ ALLOWED_HOSTS = []
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-SOCIAL_AUTH_FACEBOOK_KEY = "2223175301169173"
-SOCIAL_AUTH_FACEBOOK_SECRET = "8cc11ac1c453461867433df8464dd5b2"
+SOCIAL_AUTH_FACEBOOK_KEY = "1084882379125583"
+SOCIAL_AUTH_FACEBOOK_SECRET = "c31f9fbabaf4fcdac1f0f4ae1ee8d8fc"
 
 
 # Application definition
@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'Flower',
+    'Carts',
+    'Orders',
+    'Address',
     'social_django',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -66,6 +69,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Flores.urls'
+
+AUTH_USER_MODEL = "Flower.User"
 
 TEMPLATES = [
     {

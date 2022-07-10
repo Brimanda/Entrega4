@@ -118,10 +118,10 @@
                 <td><img src="{{ p.imagen.url }}" alt="" width="100" height="100" /></td>
                 <td>{{p.stock | title }}</td>
                 <td>
-                    <a href="{% url 'mproducto' p.id %}" class="btn btn-info btn-sm">Modificar</a>
+                    <a href="{% url 'mproducto' p.idProducto %}" class="btn btn-info btn-sm">Modificar</a>
                 </td>
                 <td>
-                    <a href="{% url 'eproducto' p.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a href="{% url 'eproducto' p.idProducto %}" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
             {%endfor%}
