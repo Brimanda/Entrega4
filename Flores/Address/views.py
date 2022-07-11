@@ -60,7 +60,7 @@ def create(request):
                 return HttpResponseRedirect(request.GET['next'])
 
         messages.success(request, 'Direccion registrada correctamente')
-        return redirect('Address:addresses')
+        return redirect(to='Address:addresses')
 
     return render(request, 'addresses/create.html', {
        'form': form 

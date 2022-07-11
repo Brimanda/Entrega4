@@ -47,7 +47,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #000;">
           <li><a class="dropdown-item" href="{% url 'Address:addresses' %}">Direcciones</a></li>
-          <li><a class="dropdown-item" href="#">Pedidos</a></li>
+          <li><a class="dropdown-item" href="{% url 'orders:completed' %}">Pedidos</a></li>
           <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
         </ul>
         &nbsp;
@@ -60,9 +60,9 @@
           {{ user.username }}
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #000;">
-          <li><a class="dropdown-item" href="{% url 'Address:addresses' %}">Action</a></li>
+          <li><a class="dropdown-item" href="{% url 'Address:addresses' %}">Direcciones</a></li>
+          <li><a class="dropdown-item" href="{% url 'orders:completed' %}">Pedidos</a></li>
           <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
         &nbsp;
       </div>

@@ -376,17 +376,11 @@ label.error{
   justify-content: center;
 }
 
-.carousel {
-  margin-bottom: 4rem;
+.carousel-inner img{
+  width: auto;
+  height: 640px;
+  max-height: 640px;
 }
-.carousel-caption {
-  bottom: 3rem;
-  z-index: 10;
-}
-.carousel-item {
-  height: 32rem;
-}
-
 
 /* 
 -------------------------------------------------- */
@@ -430,4 +424,37 @@ label.error{
   padding-top: 3rem;
   padding-bottom: 3rem;
   color: #5a5a5a;
+}
+
+.direcciones {
+
+  text-align: center;
+  background-color: black;
+
+}
+
+@media screen and (max-width: 600px) {
+  table {
+      width:100%;
+  }
+  thead {
+      display: none;
+  }
+  tr:nth-of-type(2n) {
+      background-color: inherit;
+  }
+  tr td:first-child {
+      background: #f0f0f0;
+      font-weight:bold;
+      font-size:1.3em;
+  }
+  tbody td {
+      display: block;
+      text-align:center;
+  }
+  tbody td:before {
+      content: attr(data-th);
+      display: block;
+      text-align:center;
+  }
 }

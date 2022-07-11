@@ -1,0 +1,63 @@
+<div class="card mb-2">
+    <div class="card-header">
+        <div class="row">
+
+            <div class="col-4">
+                <div class="text-uppercase">
+                    Pedido realizado
+                </div>
+                <div class="">
+                    {{ order.created_at }}
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="text-uppercase">
+                    Total
+                </div>
+                <div class="">
+                    {{ order.total }}
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="text-uppercase">
+                    Enviado a
+                </div>
+                <div class="">
+                    {{ order.shipping_address }}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="card-body">
+        {% for cp in order.cart.products_related %}
+        {% with product=cp.product %}
+        <div class="row">
+            <div class="col-4">
+                {% if product.imagen %}
+                <img id="imagen1" src="{{ product.imagen.url }}" style="width: 60px; height: 60px;" class="card-img-top"
+                    alt="...">
+                {% endif %}
+            </div>
+            <div class="col-4">
+                <div class="">
+                    {{ product.nombre }} 
+                </div>
+                <div class="text-danger">
+                   $ {{ product.precio }} USD
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="">
+                    Cantidad
+                </div>
+                <div class="">
+                    {{ cp.quantity }}
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+        {% endfor %}
+    </div>
+</div>

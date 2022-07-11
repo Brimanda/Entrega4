@@ -27,13 +27,13 @@
             <hr>
             <div class="font-weight-bold text-danger">
               Total (con IVA)
-              <div class="d-inline"> 
+              <div class="d-inline-block" id="order-total"> 
                 $ {{ order.total }}
               </div>
             </div>
         </div>
         <div class="mt-2">
-            <a href="{% url 'orders:address' %}" class="btn btn-warning">Confirmar pedido</a>
+            <a href="{{ next_url }}" class="btn btn-warning">Confirmar pedido</a>
         </div>
     </div>
 </div>

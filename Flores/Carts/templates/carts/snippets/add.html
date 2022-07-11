@@ -3,8 +3,7 @@
     <input type="hidden" name="product_id" value="{{ p.idProducto}}">
     <div class="" style="text-align: center">
         <button type="button" class="btn btn-info d-inline" id="eliminar">-</button>
-        <input type="number" value="1" class="form-control col-sm-1 d-inline" style="width : 60px" id="cantidad"
-            name="cantidad" readonly>
+        <input type="number" value="1" class="form-control col-sm-1 d-inline" style="width : 60px" id="cantidad" name="cantidad" readonly>
         <button type="button" class="btn btn-info d-inline" id="agregar">+</button>
     </div>
     <div class="mt-2" style="text-align: center">
@@ -17,11 +16,10 @@
     const agregar = document.getElementById('agregar')
     const eliminar = document.getElementById('eliminar')
     const cantidad = document.getElementById('cantidad')
-
+    
     agregar.addEventListener('click', function () {
-        contador = 0 
+
         cantidad.value = parseInt(cantidad.value) + 1
-        contador = cantidad.value +1
 
     })
 

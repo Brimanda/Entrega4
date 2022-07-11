@@ -19,11 +19,13 @@
 
     {% include 'core/snippets/navbar.html' %}
     
-    <section>
+    <section style="margin-left: 35px;">
         {% include 'orders/snippets/breadcrumb.html' %}
         <br>
         <br>
         <!-- Orden -->
+        <br>
+        <br>
         <div class="col-8">
             <div class="h3">
                 Confirma tu pedido
@@ -61,9 +63,14 @@
                             <div style="font-weight: bold;">
                                Codigo promocional
                             </div>
-                            <form>
-                                <input type="text" name="code" class="form-control" placeholder="Codigo de descuento">
+                            <form id="promocode-form" action="{% url 'promo_code:validate' %}">
+                                <input type="text" name="code" value="{{ order.promo_code.code }}"class="form-control" placeholder="Codigo de descuento" {% if order.promo_code %} readonly {% endif %}>
                             </form>
+                            <div class="text-success" id="promocode-success" style="font-size: 14px;">
+                                {% if order.promo_code %}
+                                  Codigo aplicado correctamente
+                                {% endif %}
+                            </div>
                         </div>
 
                     </div>
@@ -79,7 +86,8 @@
             </div>
         </div>
         <div class="col mt-3">
-            {% include 'orders/snippets/resume.html' %}
+            {% url 'orders:complete' as next_url %}
+            {% include 'orders/snippets/resume.html' with next_url=next_url %}
             <div class="mt-2">
                 <a href="{% url 'orders:cancel' %}" class="btn btn-danger">Cancelar pedido</a>
             </div>
@@ -91,43 +99,7 @@
     <!-- Orden -->
 
     <!-- Footer -->
-    <footer class="container py-5">
-        <div class="row">
-            <div class="col-12 col-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img"
-                    viewBox="0 0 24 24">
-                    <title>Product</title>
-                    <circle cx="12" cy="12" r="10" />
-                    <path
-                        d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
-                </svg>
-                <small class="d-block mb-3 text-muted">&copy; 2022 - Green Room</small>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Empresa</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary" href="#">Inicio</a></li>
-                    <li><a class="link-secondary" href="#">Fundación</a></li>
-                    <li><a class="link-secondary" href="#">¿Quienes Somos?</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Productos</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary" href="#">Productos</a></li>
-                    <li><a class="link-secondary" href="#">Carrito</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Usuario</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary" href="#">Iniciar Sesión</a></li>
-                    <li><a class="link-secondary" href="#">Registro</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    {% include 'core/snippets/footer.html' %}
     <!-- Footer -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -139,6 +111,43 @@
         crossorigin="anonymous"></script>
     <script src="{% static 'core/js/carrito.js' %}"></script>
 
+
+<script>
+    const form = document.getElementById('promocode-form')
+
+    form.addEventListener('submit', function(e){
+        e.preventDefault()
+
+        const input = this.code 
+        const code = input.value
+        const url = this.action + "?code=" + code 
+        const div_total = document.getElementById('order-total')
+        const div_success = document.getElementById('promocode-success')
+
+        console.log(url)
+
+        fetch(url)
+          .then(response => response.json() )
+          .then(response => {
+
+            if(response.status === true){
+
+                div_total.innerHTML = "$" + response.total
+                div_success.classList.remove('text-danger')
+                div_success.classList.add('text-success')
+
+                div_success.innerHTML = 'Codigo aplicado correctamente'
+
+
+            }else{
+                div_success.innerHTML = 'Codigo no válido'
+                div_success.classList.remove('text-success')
+                div_success.classList.add('text-danger')
+            }
+
+          })
+    })
+</script>
 
 </body>
 

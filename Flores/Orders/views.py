@@ -6,8 +6,18 @@ from .utils import get_or_create_order, breadcrumb
 from .utils import destroy_order
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.query import EmptyQuerySet
+from django.views.generic.list import ListView
 
 # Create your views here.
+
+class OrderListView(LoginRequiredMixin, ListView):
+    login_url = 'login'
+    template_name = 'orders/orders.html'
+
+    def get_queryset(self):
+        return self.request.user.orders_completed()
 
 @login_required(login_url='login')
 def order(request):
@@ -94,4 +104,21 @@ def cancel(request):
     destroy_order(request)
 
     messages.error(request, 'Orden cancelada')
+    return redirect('home')
+
+@login_required(login_url='login')
+def complete(request):
+
+    cart = get_or_create_cart(request)
+    order = get_or_create_order(cart, request)
+
+    if request.user.id != order.user_id:
+        return redirect('Carts:cart')
+
+    order.complete()
+
+    destroy_cart(request)
+    destroy_order(request)
+
+    messages.success(request, 'Compra completada exitosamente')
     return redirect('home')

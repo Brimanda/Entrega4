@@ -18,50 +18,11 @@
 <body>
     {% include 'core/snippets/navbar.html' %}
     
-    <ul class="nav navbar-dark navbar justify-content-end" style="background-color: #000000">
-        {% if user.is_superuser %}
-        <li class="nav-item">
-            <div class="dropdown dropstart">
-                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    {{ user.username }}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #000;">
-                    <li><a class="dropdown-item" href="{% url 'Address:addresses' %}">Action</a></li>
-                    <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-                &nbsp;
-            </div>
-        </li>
-        {% elif user.is_authenticated %}
-        <li class="nav-item">
-            <div class="dropdown dropstart">
-                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    {{ user.username }}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #000;">
-                    <li><a class="dropdown-item" href="{% url 'Address:addresses' %}">Action</a></li>
-                    <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-                &nbsp;
-            </div>
-        </li>
-        {% else %}
-        <li class="nav-item justify-content-end">
-            <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Iniciar Sesión</a>
-        </li>
-        <li class="nav-item justify-content-end">
-            <a class="nav-link active" aria-current="page" href="{% url 'registro' %}">Registro</a>
-        </li>
-        {% endif %}
-    </ul>
-    <!-- 2nav -->
     <!-- Carrusel -->
     <div class="col">
-        <div class="h3">
+        <br>
+        <br>
+        <div class="h3" style="margin-left: 30px;">
             Editar dirección
         </div>
         <div class="">
@@ -71,43 +32,7 @@
     <!-- Carrito de Compras -->
 
     <!-- Footer -->
-    <footer class="container py-5">
-        <div class="row">
-            <div class="col-12 col-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img"
-                    viewBox="0 0 24 24">
-                    <title>Product</title>
-                    <circle cx="12" cy="12" r="10" />
-                    <path
-                        d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
-                </svg>
-                <small class="d-block mb-3 text-muted">&copy; 2022 - Green Room</small>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Empresa</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary" href="#">Inicio</a></li>
-                    <li><a class="link-secondary" href="#">Fundación</a></li>
-                    <li><a class="link-secondary" href="#">¿Quienes Somos?</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Productos</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary" href="#">Productos</a></li>
-                    <li><a class="link-secondary" href="#">Carrito</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Usuario</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="link-secondary" href="#">Iniciar Sesión</a></li>
-                    <li><a class="link-secondary" href="#">Registro</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    {% include 'core/snippets/footer.html' %}
     <!-- Footer -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

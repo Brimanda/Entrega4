@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 import decimal
 from Flower.models import User 
+from Orders.common import OrderStatus
 from Flower.models import Producto
 from django.db.models.signals import pre_save
 from django.db.models.signals import m2m_changed
@@ -43,6 +44,10 @@ class Cart(models.Model):
 
     def products_related(self):
         return self.cartproducts_set.select_related('product')
+
+    @property
+    def order(self):
+        return self.order_set.filter(status=OrderStatus.CREATED).first()
 
 class CartProductsManager(models.Manager):
 
