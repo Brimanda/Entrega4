@@ -20,6 +20,27 @@
   {% include 'core/snippets/navbar.html' %}
   <!-- Carrito de Compras-->
   <section>
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" style="align-items:center">
+      <div class="carousel-inner">
+        <div class="carousel-item active imgtam">
+          <img src="{% static 'core/img/slider1.jpg' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item imgtam">
+          <img src="{% static 'core/img/slider9.jpg' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item imgtam">
+          <img src="{% static 'core/img/slider10.jpg' %}" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">1</div>
       <div class="tab-pane fade show active container" id="pills-profile" role="tabpanel"

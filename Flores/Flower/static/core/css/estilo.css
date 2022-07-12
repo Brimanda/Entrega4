@@ -458,3 +458,10 @@ label.error{
       text-align:center;
   }
 }
+
+.imgtam {
+    width: 400px;
+    height: 225px;
+    max-height: 225px;
+
+}
